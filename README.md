@@ -1,61 +1,69 @@
-# Qwen 2.5 Coder 7B Android Deployment Pipeline
+# Mobile LLM Deployment on Android
 
-This repository documents the complete workflow for deploying Qwen 2.5 Coder 7B on an Android device using llama.cpp and Termux.
+This repository documents workflows for running local Large Language Models (LLMs) on Android devices.
 
-## Notebooks
+The project focuses on deploying coding-oriented open-source models using quantization, GGUF conversion, llama.cpp, Android Termux, and Snapdragon-based smartphones.
 
-### 01_hf_to_gguf_q4_0.ipynb
+## Objective
 
-Downloads the model from Hugging Face and converts it to a quantized GGUF format.
+The goal of this project is to create a portable, offline AI environment capable of running local coding models directly on a smartphone without relying on cloud APIs.
 
-Steps:
+Key objectives include:
 
-1. Download Qwen 2.5 Coder 7B Instruct
-2. Convert Hugging Face model to GGUF
-3. Quantize using Q4_0
-
-Outputs:
-
-* qwen2.5-coder-7b-f16.gguf
-* qwen2.5-coder-7b-q4_0.gguf
-
----
-
-### 02_adb_termux_setup.ipynb
-
-Prepares the Android device.
-
-Steps:
-
-1. Verify ADB connectivity
-2. Transfer the quantized model
-3. Install and configure Termux
-4. Prepare the device for local inference
-
-Outputs:
-
-* Model deployed to Android storage
-* Termux environment configured
+* Downloading and preparing open-source LLMs
+* Converting models to GGUF format
+* Applying quantization for mobile deployment
+* Deploying models to Android devices
+* Running local inference using llama.cpp
+* Hosting an OpenAI-compatible API endpoint
+* Exploring Qualcomm Hexagon NPU acceleration
 
 ---
 
-### 03_phone_inference_server.ipynb
+## Workflows
 
-Runs local inference on the Android device.
+### CPU Workflow
 
-Steps:
+The CPU workflow is fully documented and tested.
 
-1. Build llama.cpp
-2. Resolve common build issues
-3. Run inference
-4. Benchmark performance
-5. Start an OpenAI-compatible API server
+Features:
 
-Outputs:
+* Hugging Face model download
+* GGUF conversion
+* Q4_0 quantization
+* Android deployment using ADB
+* Termux environment setup
+* llama.cpp compilation
+* Local inference
+* Performance benchmarking
+* OpenAI-compatible API server
 
-* Local inference endpoint
-* Benchmark results
-* OpenAI-compatible API
+Documentation:
+
+```text
+CPU/README.md
+```
+
+---
+
+### NPU Workflow
+
+The NPU workflow is currently under development.
+
+Planned areas of exploration:
+
+* ONNX export
+* Qualcomm QNN conversion
+* Snapdragon AI Engine Runtime
+* Hexagon NPU deployment
+* Performance benchmarking
+* CPU vs NPU comparison
+
+Documentation:
+
+```text
+NPU/README.md
+```
 
 ---
 
@@ -63,36 +71,88 @@ Outputs:
 
 ```text
 .
-├── 01_hf_to_gguf_q4_0.ipynb
-├── 02_adb_termux_setup.ipynb
-├── 03_phone_inference_server.ipynb
+├── CPU/
+│   ├── README.md
+│   ├── 01_hf_to_gguf_q4_0.ipynb
+│   ├── 02_adb_termux_setup.ipynb
+│   ├── 03_phone_inference_server.ipynb
+│   └── Quick_Start_Guide.md
+│
+├── NPU/
+│   └── README.md
+│
 ├── .gitignore
 └── README.md
 ```
 
-## Execution Order
+---
 
-Run the notebooks sequentially:
+## CPU Workflow Execution Order
+
+Execute the notebooks sequentially:
 
 1. 01_hf_to_gguf_q4_0.ipynb
 2. 02_adb_termux_setup.ipynb
 3. 03_phone_inference_server.ipynb
 
-## Benchmark Reference
+After deployment, refer to:
+
+```text
+CPU/Quick_Start_Guide.md
+```
+
+for daily usage commands.
+
+---
+
+## Tested Configuration
 
 Device:
 
+```text
 Samsung Galaxy S26 Ultra
+```
 
 Model:
 
+```text
 Qwen2.5-Coder-7B Q4_0
+```
 
 Backend:
 
+```text
 CPU
+```
 
 Observed Performance:
 
-* Prompt Processing: ~9 tokens/sec
-* Generation: ~6.4 tokens/sec
+```text
+Prompt Processing: ~9 tokens/sec
+Generation: ~6.4 tokens/sec
+```
+
+---
+
+## Status
+
+| Workflow             | Status      |
+| -------------------- | ----------- |
+| HF → GGUF Conversion | Complete    |
+| Q4_0 Quantization    | Complete    |
+| Android Deployment   | Complete    |
+| CPU Inference        | Complete    |
+| API Server           | Complete    |
+| NPU Deployment       | In Progress |
+
+---
+
+## License
+
+Refer to the licenses of the respective upstream projects and model providers, including:
+
+* Qwen
+* llama.cpp
+* Hugging Face
+* Qualcomm AI tooling (where applicable)
+
