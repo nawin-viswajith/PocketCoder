@@ -28,6 +28,9 @@ models/
 # GGUF Files
 *.gguf
 
+# llama.cpp
+llama.cpp/
+
 # llama.cpp Build Artifacts
 llama.cpp/build/
 llama.cpp/bin/
